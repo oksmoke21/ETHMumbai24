@@ -19,31 +19,6 @@ export const Header: FunctionComponent = () => {
       </div>
       <div className="flex flex-row">
         <div className="flex flex-row gap-3 items-center justify-end m-5">
-          {process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS ? (
-            <a
-              href={`https://sepolia.scrollscan.com/address/0x${process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS}`}
-              target={"_blank"}
-              className="text-black font-light text-sm hover:underline "
-            >
-              {shortenAddress(
-                "0x" + process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS
-              )}
-            </a>
-          ) : null}
-          <div className="">
-            <a target={"_blank"} rel={"noreferrer"} href="https://pse.dev/">
-              <Image alt="pse" src={imgPSE} width={25} height={25}></Image>
-            </a>
-          </div>
-          <div className="">
-            <a
-              target={"_blank"}
-              rel={"noreferrer"}
-              href="https://github.com/privacy-scaling-explorations/anon-aadhaar"
-            >
-              <Image alt="github" src={imgGithub} width={25} height={25}></Image>
-            </a>
-          </div>
         </div>
         <div className="flex m-5 items-center space-x-2">
           <Web3Button />
