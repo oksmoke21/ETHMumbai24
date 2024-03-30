@@ -49,7 +49,7 @@ const Index = () => {
   const router = useRouter()
   async function onSubmit() {
     const creditScore = Math.floor(Math.random() * (850 - 600 + 1)) + 500;
-    console.log(creditScore)
+    console.log("Credit score: ", creditScore)
     router.push("/myprofile")
   }
   return (

@@ -15,6 +15,7 @@
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.4",
+    "@openzeppelin/contracts": "^5.0.2",
     "@quillforms/react-renderer-utils": "^5.10.0",
     "@quillforms/renderer-core": "^5.8.0",
     "@radix-ui/react-dialog": "^1.0.5",
