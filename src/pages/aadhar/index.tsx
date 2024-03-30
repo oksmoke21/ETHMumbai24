@@ -39,7 +39,7 @@ const initParams = {
   artifactsOrigin: 0,
 }
 
-function index({ setUserStatus, setUseTestAadhaar, useTestAadhaar }: HomeProps) {
+function Index({ setUserStatus, setUseTestAadhaar, useTestAadhaar }: HomeProps) {
   const [anonAadhaar] = useAnonAadhaar();
   const { isConnected, address } = useAccount();
   const router = useRouter();
@@ -160,7 +160,8 @@ function index({ setUserStatus, setUseTestAadhaar, useTestAadhaar }: HomeProps) 
         const jsonProof = JSON.parse(binaryStr as string);
         console.log('File contents: ', jsonProof);
         setProof(jsonProof);
-        setTriggerVerification(true); // auto-trigger proof verification
+        setTriggerVerification(true);
+        router.push('/creditform');
       } catch (error) {
         console.error('Error parsing the proof JSON', error);
       }
@@ -175,11 +176,12 @@ function index({ setUserStatus, setUseTestAadhaar, useTestAadhaar }: HomeProps) 
 
   useEffect(() => {
     const isConnected = () => {
-      if (anonAadhaar.status) {
-        router.push('/')
+      if (anonAadhaar.status === 'logged-in') {
+        router.push('/creditform')
       }
     }
-  })
+    isConnected();
+  },[anonAadhaar.status])
 
   return (
     <div>
@@ -212,7 +214,7 @@ function index({ setUserStatus, setUseTestAadhaar, useTestAadhaar }: HomeProps) 
         ) : (
           <></>
         )}
-                <p className="mt-4">or</p>
+        <p className="mt-4">or</p>
 
         <div
           {...getRootProps()}
@@ -226,4 +228,4 @@ function index({ setUserStatus, setUseTestAadhaar, useTestAadhaar }: HomeProps) 
   )
 }
 
-export default index
+export default Index;

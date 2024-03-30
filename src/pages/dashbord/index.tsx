@@ -22,7 +22,7 @@ const formSchema = z.object({
     gender: z.string().min(2).max(50),
     dob: z.date(),
 })
-const index = () => {
+const Index = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -158,4 +158,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Index

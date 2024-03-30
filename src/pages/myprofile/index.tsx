@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProviderTable } from '@/components/ProviderTable'
 import { LoansTable } from '@/components/LoansTable'
 
-const index = () => {
+const Index = () => {
   return (
     <div>
       <Header />
@@ -45,4 +45,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index

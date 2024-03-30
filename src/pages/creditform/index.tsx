@@ -32,7 +32,7 @@ const formSchema = z.object({
   dob: z.date(),
 })
 
-const index = () => {
+const Index = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,7 +47,9 @@ const index = () => {
     },
   })
   const router = useRouter()
-  function onSubmit() {
+  async function onSubmit() {
+    const creditScore = Math.floor(Math.random() * (850 - 600 + 1)) + 500;
+    console.log(creditScore)
     router.push("/myprofile")
   }
   return (
@@ -232,4 +234,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

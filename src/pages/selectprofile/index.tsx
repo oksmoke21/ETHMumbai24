@@ -1,7 +1,7 @@
 import { Header } from '@/components/Header';
 import React from 'react';
 
-const index = () => {
+const Index = () => {
     return (
         <div className='h-screen w-screen bg-[#fff]'>
             <Header />
@@ -29,4 +29,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Index
