@@ -4,7 +4,7 @@ import "hardhat-dependency-compiler";
 require("dotenv").config({ path: "../.env.local" });
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.19",
+  solidity: "0.8.20",
   dependencyCompiler: {
     paths: ["@anon-aadhaar/contracts"],
   },
