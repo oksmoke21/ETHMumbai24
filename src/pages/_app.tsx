@@ -9,12 +9,13 @@ import {
   EthereumClient,
 } from "@web3modal/ethereum";
 import { Header } from "../components/Header";
-import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { scrollSepolia } from 'wagmi/chains'
 import { Web3Modal } from "@web3modal/react";
 import { Footer } from "@/components/Footer";
 import { UserStatus } from "@/interface";
 
-const chains = [sepolia];
+const chains = [scrollSepolia];
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || "";
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
     UserStatus.LOGGED_OUT
   );
   const [ready, setReady] = useState(false);
+  const [useTestAadhaar, setUseTestAadhaar] = useState<boolean>(false);
 
   useEffect(() => {
     setReady(true);
@@ -55,10 +57,10 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       {ready ? (
         <WagmiConfig config={wagmiConfig}>
-          <AnonAadhaarProvider>
+          <AnonAadhaarProvider _useTestAadhaar={useTestAadhaar}>
             <div className="flex flex-col h-screen bg-gray-100 justify-between">
-              <Header />
-              <Component {...pageProps} setUserStatus={setUserStatus} />
+              {/* <Header /> */}
+              <Component {...pageProps} setUserStatus={setUserStatus} setUseTestAadhaar={setUseTestAadhaar} useTestAadhaar={useTestAadhaar} />
               <Footer text={userStatus} />
             </div>
           </AnonAadhaarProvider>

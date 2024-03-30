@@ -1,17 +1,18 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { getTotalVotes } from "@/utils";
+// import { getTotalVotes } from "@/utils";
 import { Loader } from "./Loader";
 
 export const VoteResults: FunctionComponent = ({}) => {
   const [totalVote, setTotalVote] = useState(0);
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    getTotalVotes().then((total) => {
-      setTotalVote(total);
-      setReady(true);
-    });
-  });
+  // useEffect(() => {
+  //   // getTotalVotes().then((total) => {
+  //   myFunction().then((total) => {
+  //     setTotalVote(total);
+  //     setReady(true);
+  //   });
+  // });
 
   return (
     <>

@@ -1,37 +1,41 @@
 import { ethers } from "ethers";
-import votingAbi from "../public/AnonAadhaarVote.json";
+import { abi } from "../public/AadhaarNFT.json";
 
-const providerUrl = `https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_SEPOLIA_PROVIDER_ID}`;
+type BigNumberish = string | bigint
 
-export const getTotalVotes = async (): Promise<number> => {
-  const provider = ethers.getDefaultProvider(providerUrl);
-  const voteContract = new ethers.Contract(
-    "0x" + process.env.NEXT_PUBLIC_VOTE_CONTRACT_ADDRESS,
-    votingAbi.abi,
-    provider
-  );
+export type PackedGroth16Proof = [
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish,
+    BigNumberish
+]
 
-  const proposalCount = await voteContract.getProposalCount();
+// const providerUrl = `${process.env.NEXT_PUBLIC_SCROLL_SEPOLIA_RPC}`;
+// const provider = ethers.getDefaultProvider(providerUrl);
 
-  // Initialize a variable to store the total vote count
-  let totalVoteCount = 0;
+// export const isValidAadhaar = async (
+//     identityNullifier: string,
+//     userNullifier: string,
+//     timestamp: string,
+//     signal: string,
+//     PackedGroth16Proof: PackedGroth16Proof
+// ): Promise<boolean> => {
+//     console.log("Provider: ", provider)
+//     const aadhaarNFT = new ethers.Contract(
+//         `0x${process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS}`,
+//         abi,
+//         provider
+//     );
 
-  // Iterate through the proposals and sum their vote counts
-  for (let i = 0; i < proposalCount; i++) {
-    const voteCount = await voteContract.getProposal(i);
-    totalVoteCount += Number(voteCount[1]);
-  }
-
-  return totalVoteCount;
-};
-
-export const hasVoted = async (userAddress: string): Promise<boolean> => {
-  const provider = ethers.getDefaultProvider(providerUrl);
-  const voteContract = new ethers.Contract(
-    "0x" + process.env.NEXT_PUBLIC_VOTE_CONTRACT_ADDRESS,
-    votingAbi.abi,
-    provider
-  );
-
-  return await voteContract.checkVoted(userAddress);
-};
+//     return await aadhaarNFT.isAadhaarValid(
+//         identityNullifier,
+//         userNullifier,
+//         timestamp,
+//         signal,
+//         PackedGroth16Proof
+//     );
+// };

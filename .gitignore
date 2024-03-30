@@ -40,3 +40,6 @@ next-env.d.ts
 /contracts/artifacts
 /contracts/typechain-types
 /contracts/.env
+
+# proof
+proof.json
