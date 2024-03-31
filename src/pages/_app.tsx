@@ -10,12 +10,14 @@ import {
 } from "@web3modal/ethereum";
 import { Header } from "../components/Header";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { scrollSepolia } from 'wagmi/chains'
+// import { scrollSepolia } from 'wagmi/chains'
+import { sepolia } from 'wagmi/chains'
 import { Web3Modal } from "@web3modal/react";
 import { Footer } from "@/components/Footer";
 import { UserStatus } from "@/interface";
 
-const chains = [scrollSepolia];
+// const chains = [scrollSepolia];
+const chains = [sepolia];
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || "";
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);

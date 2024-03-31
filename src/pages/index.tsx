@@ -204,8 +204,9 @@ export default function Home({ setUserStatus, setUseTestAadhaar, useTestAadhaar 
                     <img src="SCORE.png" className="h-[400px] w-[400px]" />
                 </div>
                 <div>
-                    <p className="text-center font-bold text-[1.6rem]">Use your Real world Credit score</p>
-                    <p className="text-center font-bold text-[1.6rem]"> to get DEFI Credits</p>
+                    <p className="text-center font-bold text-[1.6rem]">Anonymously onramp your TradFi Credit Score</p>
+                    <p className="text-center font-bold text-[1.6rem]">and get access to <b>better DeFi Loans
+                        </b></p>
                 </div>
                 <div className="mb-[100px]">
                     <Dialog>

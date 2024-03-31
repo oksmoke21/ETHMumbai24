@@ -5,37 +5,71 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { BorrowerTable } from '@/components/BorrowerTable'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+
+import { useAccount, useContractWrite } from "wagmi";
+import { abi } from "../../../public/AadhaarNFT.json";
+
 const formSchema = z.object({
-    firstInterest: z.string().min(2).max(50),
-    secondInterest: z.string().min(2).max(50),
-    thirdInterest: z.string().min(2).max(50),
-    fourthInterest: z.string().min(2).max(50),
-    pancardnumber: z.string().min(2).max(50),
-    adress: z.string().min(2).max(50),
-    gender: z.string().min(2).max(50),
-    dob: z.date(),
+    firstInterest: z.number(),
+    secondInterest: z.number(),
+    thirdInterest: z.number(),
+    fourthInterest: z.number(),
+    firstCollateralRatio: z.number(),
+    secondCollateralRatio: z.number(),
+    thirdCollateralRatio: z.number(),
+    fourthCollateralRatio: z.number()
 })
 const Index = () => {
+    const { isConnected, address } = useAccount();
+
+    const { data, isLoading, isSuccess, write } = useContractWrite({
+        address: `0x${process.env.NEXT_PUBLIC_SCORE_CONTRACT_ADDRESS || ""}`,
+        abi: abi,
+        functionName: "registerLender",
+    });
+
+    useEffect(() => {
+        const credit = () => {
+            if (isSuccess) {
+                setEdit(true);
+            }
+        }
+        credit()
+    })
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            firstInterest: "",
-            secondInterest: "",
-            thirdInterest: "",
-            fourthInterest: ""
+            firstInterest: 0,
+            secondInterest: 0,
+            thirdInterest: 0,
+            fourthInterest: 0,
+            firstCollateralRatio: 0,
+            secondCollateralRatio: 0,
+            thirdCollateralRatio: 0,
+            fourthCollateralRatio: 0,
         },
     })
     const router = useRouter();
-    const [edit, setEdit] = useState(false)
-    function onSubmit() {
-        setEdit(true);
+    const [edit, setEdit] = useState(false);
+
+    function onSubmit(values: any) {
+        console.log(values)
+
+        write({
+            args: [
+                values.firstInterest, values.secondInterest, values.thirdInterest, values.fourthInterest,
+                values.firstCollateralRatio, values.secondCollateralRatio, values.thirdCollateralRatio, values.fourthCollateralRatio
+            ]
+        });
+        // setEdit(true);
     }
     return (
         <div className='h-screen w-[98vw] bg-[#fff] '>
@@ -43,10 +77,10 @@ const Index = () => {
             <h1 className='font-bold text-[2rem] pl-20 mb-4'>My Dashboard</h1>
             <div className='relative flex flex-row space-x-6 ml-[5%]'>
                 <div className='w-[30%] p-4 border-2 rounded-[10px]'>
-                    <h1 className='text-[1.2rem] font-bold mb-6'>Set Your Interest Rates</h1>
+                    <h1 className='text-[1.2rem] font-bold mb-6'>Set Your Interest Rates & Collateral</h1>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <div className="w-[90%]">
+                            <div className="w-[90%] flex">
                                 <FormField
                                     control={form.control}
                                     name="firstInterest"
@@ -59,8 +93,21 @@ const Index = () => {
                                         </FormItem>
                                     )}
                                 />
+                                <div className='mt-8'>
+                                    <FormField
+                                        control={form.control}
+                                        name="firstCollateralRatio"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <Input  {...field} />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
                             </div>
-                            <div className="w-[90%]">
+                            <div className="w-[90%] flex">
                                 <FormField
                                     control={form.control}
                                     name="secondInterest"
@@ -73,8 +120,21 @@ const Index = () => {
                                         </FormItem>
                                     )}
                                 />
+                                <div className='mt-8'>
+                                    <FormField
+                                        control={form.control}
+                                        name="secondCollateralRatio"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <Input  {...field} />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
                             </div>
-                            <div className="w-[100%]">
+                            <div className="w-[100%] flex">
                                 <FormField
                                     control={form.control}
                                     name="thirdInterest"
@@ -82,13 +142,26 @@ const Index = () => {
                                         <FormItem>
                                             <FormLabel>For Credit Score 601 - 749</FormLabel>
                                             <FormControl>
-                                                <Input p {...field} />
+                                                <Input {...field} />
                                             </FormControl>
                                         </FormItem>
                                     )}
                                 />
+                                <div className='mt-8'>
+                                    <FormField
+                                        control={form.control}
+                                        name="thirdCollateralRatio"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <Input  {...field} />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
                             </div>
-                            <div className="w-[100%]">
+                            <div className="w-[100%] flex">
                                 <FormField
                                     control={form.control}
                                     name="fourthInterest"
@@ -101,9 +174,21 @@ const Index = () => {
                                         </FormItem>
                                     )}
                                 />
+                                <div className='mt-8'>
+                                    <FormField
+                                        control={form.control}
+                                        name="fourthCollateralRatio"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <Input  {...field} />
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
                             </div>
-
-                            <Button type="submit" onClick={() => onSubmit()}>Save</Button>
+                            <Button type="submit" onClick={() => onSubmit(form.getValues())}>Save</Button>
                         </form>
                     </Form>
                 </div>

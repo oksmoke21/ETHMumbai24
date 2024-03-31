@@ -5,28 +5,33 @@ import imgPSE from "../../public/pse.png";
 import { VoteResults } from "./VoteResults";
 import { Web3Button, Web3NetworkSwitch } from "@web3modal/react";
 import { useAccount } from "wagmi";
-
+import { useRouter } from "next/router";
 function shortenAddress(address: string) {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
 export const Header: FunctionComponent = () => {
   const { isConnected } = useAccount();
+  const router = useRouter()
+  const onclick = ()=>{
+    router.push('/');
+  }
   return (
     <header className="flex justify-between items-center">
       <div>
-        <img src="SCORE.png" className="h-16 w-20 ml-10"/>
+        <img src="SCORE.png" className="h-16 w-20 ml-10" onClick={()=>onclick()}/>
       </div>
       <div className="flex flex-row">
         <div className="flex flex-row gap-3 items-center justify-end m-5">
-          {process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS ? (
+          {process.env.NEXT_PUBLIC_SCORE_CONTRACT_ADDRESS ? (
             <a
-              href={`https://sepolia.scrollscan.com/address/0x${process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS}`}
+            // 
+              href={`https://sepolia.scrollscan.com/address/0x${process.env.NEXT_PUBLIC_SCORE_CONTRACT_ADDRESS}`}
               target={"_blank"}
               className="text-black font-light text-sm hover:underline "
             >
               {shortenAddress(
-                "0x" + process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS
+                "0x" + process.env.NEXT_PUBLIC_SCORE_CONTRACT_ADDRESS
               )}
             </a>
           ) : null}

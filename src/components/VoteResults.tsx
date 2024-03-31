@@ -7,8 +7,7 @@ export const VoteResults: FunctionComponent = ({}) => {
   const [ready, setReady] = useState(false);
 
   // useEffect(() => {
-  //   // getTotalVotes().then((total) => {
-  //   myFunction().then((total) => {
+  // getTotalVotes().then((total) => {
   //     setTotalVote(total);
   //     setReady(true);
   //   });

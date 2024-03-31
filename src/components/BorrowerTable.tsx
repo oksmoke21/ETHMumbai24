@@ -12,28 +12,38 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 
 const borrowerLists = [
   {
-    borrowerList: "Aave",
+    borrowerList: "0xd17266057470A096ea34...",
     ticker: "$500",
     uInterestRate: "5.6%",
     oInterestRate: "4.5",
+    date:"31-03-24",
+    status:"Ongoing"
+
   },
   {
-    borrowerList: "Compound",
-    ticker: "$500",
-    uInterestRate: "5.6%",
+    borrowerList: "0xd899266057433A096ea...",
+    ticker: "$2000",
+    uInterestRate: "6.6%",
     oInterestRate: "4.5",
+    date:"31-03-24",
+    status:"Defaulted"
+
   },
   {
-    borrowerList: "P2P Pool",
-    ticker: "$500",
-    uInterestRate: "5.6%",
-    oInterestRate: "4.5",
+    borrowerList: "0xd8876592660574096ea...",
+    ticker: "$300",
+    uInterestRate: "4.6%",
+    oInterestRate: "9.5",
+    date:"31-03-24",
+    status:"Ongoing"
   },
   {
-    borrowerList: "P2P Peer",
-    ticker: "$500",
+    borrowerList: "0xk899266057433A096ea3...",
+    ticker: "$1600",
     uInterestRate: "5.6%",
-    oInterestRate: "4.5",
+    oInterestRate: "9.5",
+    date:"31-03-24",
+    status:"Repayed"
   }
 ]
 
@@ -45,10 +55,10 @@ export function BorrowerTable() {
         <TableRow>
           <TableHead className="">Borrower</TableHead>
           <TableHead>Loan Amount</TableHead>
-          <TableHead className="">Loan Detail</TableHead>
+          <TableHead className="">Interest</TableHead>
+          <TableHead className="">Collateral</TableHead>
           <TableHead className="">Date</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead className="">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -63,21 +73,10 @@ export function BorrowerTable() {
               {borrowerList.oInterestRate}%
             </TableCell>
             <TableCell>
-              {borrowerList.uInterestRate}
+              {borrowerList.date}
             </TableCell>
             <TableCell>
-              <Select>
-                <SelectTrigger className="w-[100px]">
-                  <SelectValue placeholder="Change Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Status</SelectLabel>
-                    <SelectItem value="paid">Paid</SelectItem>
-                    <SelectItem value="default">Default</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              {borrowerList.status}
             </TableCell>
             {/* <TableCell className="text-right">{borrowerList.uInterestRate}</TableCell> */}
           </TableRow>

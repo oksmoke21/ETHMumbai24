@@ -24,9 +24,10 @@ export default function Vote({ setUserStatus }: VoteProps) {
     const router = useRouter();
     const { isConnected, address } = useAccount();
     const [rating, setRating] = useState<string>();
+
     const { data, isLoading, isSuccess, write } = useContractWrite({
         // address: `0x${process.env.NEXT_PUBLIC_VOTE_CONTRACT_ADDRESS || ""}`,
-        address: `0x${process.env.NEXT_PUBLIC_AADHAAR_NFT_CONTRACT_ADDRESS || ""}`,
+        address: `0x${process.env.NEXT_PUBLIC_SCORE_CONTRACT_ADDRESS || ""}`,
         abi: aadhaarNFT.abi,
         functionName: "mintAadhaarNFT",
     });
@@ -68,13 +69,6 @@ export default function Vote({ setUserStatus }: VoteProps) {
         if (anonAadhaar.status === "logged-in")
             setAnonAadhaarCore(anonAadhaar.anonAadhaarProof);
     }, [anonAadhaar]);
-
-    // // Removed hasVoted
-    // useEffect(() => {
-    //     address
-    //         ? hasVoted(address.toString()).then((response) => setVoted(response))
-    //         : null;
-    // }, [address]);
 
     useEffect(() => {
         isConnected
@@ -120,7 +114,7 @@ export default function Vote({ setUserStatus }: VoteProps) {
                                         <div className="font-bold">
                                             You can check your transaction{" "}
                                             <a
-                                                href={`https://sepolia.scrollscan.com/tx/${data?.hash}`}
+                                                href={`https://sepolia.etherscan.io/tx/${data?.hash}`}
                                                 target="_blank"
                                                 className="text-blue-500"
                                             >

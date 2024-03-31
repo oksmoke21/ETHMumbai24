@@ -14,25 +14,25 @@ import LoanForm from "./ui/LoanForm"
 
 const loanProviders = [
   {
-    loanProvider: "Aave",
+    loanProvider: "0xd17266057470A096ea346...",
     ticker: "$500",
     uInterestRate: "5.6%",
     oInterestRate: "4.5",
   },
   {
-    loanProvider: "Compound",
+    loanProvider: "0xd899266057433A096ea34...",
     ticker: "$500",
     uInterestRate: "5.6%",
     oInterestRate: "4.5",
   },
   {
-    loanProvider: "P2P Pool",
+    loanProvider: "0xd8876592660574096ea346...",
     ticker: "$500",
     uInterestRate: "5.6%",
     oInterestRate: "4.5",
   },
   {
-    loanProvider: "P2P Peer",
+    loanProvider: "0xk899266057433A096ea346...",
     ticker: "$500",
     uInterestRate: "5.6%",
     oInterestRate: "4.5",
@@ -66,7 +66,7 @@ export function ProviderTable() {
             <TableCell>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button>Apply For Loan</Button>
+                  <Button >Apply For Loan</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                   <DialogHeader>

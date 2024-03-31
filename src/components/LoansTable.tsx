@@ -12,29 +12,11 @@ import { Button } from "./ui/button"
   
   const loanProviders = [
     {
-      loanProvider: "Aave",
+      loanProvider: "0xd899266057433A096ea34...",
       ticker: "$500",
-      uInterestRate: "5.6%",
+      uInterestRate: "7.5% , 90% collateral Ratio",
       oInterestRate: "4.5",
     },
-    {
-      loanProvider: "Compound",
-      ticker: "$500",
-      uInterestRate: "5.6%",
-      oInterestRate: "4.5",
-    },
-    {
-      loanProvider: "P2P Pool",
-      ticker: "$500",
-      uInterestRate: "5.6%",
-      oInterestRate: "4.5",
-    },
-    {
-      loanProvider: "P2P Peer",
-      ticker: "$500",
-      uInterestRate: "5.6%",
-      oInterestRate: "4.5",
-    }
   ]
   
   export function LoansTable() {
@@ -43,10 +25,11 @@ import { Button } from "./ui/button"
         <TableCaption>A list of all My loans applied</TableCaption>
         <TableHeader>  
           <TableRow>
+          <TableHead className="">Date</TableHead>
             <TableHead className="">Lender</TableHead>
             <TableHead>Amount</TableHead>
             <TableHead className="">Rate</TableHead>
-            <TableHead className="">Loan Details</TableHead>
+            <TableHead className="">Collateral Ratio</TableHead>
             <TableHead className="">Status</TableHead>
             <TableHead className="">Actions</TableHead>
            
@@ -55,19 +38,20 @@ import { Button } from "./ui/button"
         <TableBody>
           {loanProviders.map((loanProvider) => (
             <TableRow key={loanProvider.loanProvider}>
+                            <TableCell className="font-medium">31-03-2024</TableCell>
               <TableCell className="font-medium">{loanProvider.loanProvider}</TableCell>
               <TableCell>{loanProvider.ticker}</TableCell>
               <TableCell>
-                {loanProvider.uInterestRate}
+                8%
               </TableCell>
               <TableCell>
-                {loanProvider.oInterestRate}%
+                90%
               </TableCell>
               <TableCell>
-                {loanProvider.uInterestRate}
+                Ongoing
               </TableCell>
               <TableCell>
-                <Button> action</Button>
+                <Button> Action</Button>
               </TableCell>
             </TableRow>
           ))}
